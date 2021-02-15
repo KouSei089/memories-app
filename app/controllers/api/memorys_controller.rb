@@ -12,10 +12,17 @@ class Api::MemorysController < ApplicationController
     end
   end
 
+  def show
+    @memory = Memory.find(params[:id])
+    render 'show', handlers: 'jbuilder'
+  end
+
+  
+
   def update
     @memory = Memory.find(params[:id])
-    if @memory.update_attributes(memory_params)
-      render 'index', formats: 'json', handlers: 'jbuilder'
+    if @memory.update(memory_params)
+      render :show, handlers: 'jbuilder'
     else
       render json: @memory.errors, status: :unprocessable_entity
     end

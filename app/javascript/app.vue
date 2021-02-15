@@ -21,7 +21,7 @@
             <v-card-subtitle>{{ memory.emotion }}</v-card-subtitle>
             <v-card-text>{{ memory.description }}</v-card-text>
             <v-card-actions>
-              <v-btn flat color="red" @click="putModel">Update</v-btn>
+              <v-btn flat color="red" @click="putModel(memory.id)">Update</v-btn>
               <v-btn flat color="gray">Delete</v-btn>
             </v-card-actions>
           </v-flex>
@@ -107,9 +107,10 @@ export default {
   },
   mounted() {
     this.setMemory();
+    this.putModel();
   },
   methods: {
-    setMemory: function() {
+    setMemory: function(id) {
       axios.get('/api/memorys')
       .then(response => (
         this.memorys = response.data
@@ -132,19 +133,19 @@ export default {
       });
       this.dialogPostFlag = !this.dialogPostFlag
     },
-    putModel: function() {
-      axios.get("/api/memorys/${this.$route.params.id}.json")
+    putModel: function(id) {
+      axios.get("/api/memorys/" + id + ".json")
       .then(response => {
         this.putTitle = response.data.title
         this.putEmotion = response.data.emotion
         this.postDescription = response.data.description
       });
+      this.id = id
       this.dialogPutFlag = !this.dialogPutFlag
     },
     putMemory: function() {
-      axios.put('/api/memorys/${this.$route.params.id}',{ 
-        title: this.putTitle, emotion: this.putEmotion, description: this.putDescription
-       })
+      axios.put("/api/memorys/" + this.id + ".json",{ 
+        title: this.putTitle, emotion: this.putEmotion, description: this.putDescription})
        .then(response => {
          this.setMemory();
        });
