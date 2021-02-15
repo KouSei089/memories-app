@@ -17,77 +17,49 @@
         </v-flex>
       </v-layout>
     </v-card>
-
-  <!-- ポップアップPOST -->
-  <v-dialog v-model="dialogPostFlag" width="800" persistent>
-    <v-card>
-      <v-card-title class="headline blue-grey darken-4 white--text">
-        Create Form
-      </v-card-title>
-      <v-text-field v-model="postTitle" label="Memory Title" required style='margin:20px; margin-top:30px'></v-text-field>
-      <v-flex d-flex>
-        <v-text-field v-model="postEmotion" label="Emotion" required style='margin:20px; margin-bottom:0px; margin-left:20px'></v-text-field>
-      </v-flex>
-      <v-card-text>
-        <p>Memory</p>
-        <div style="width:100%">
-          <textarea  style='width:100%; height:300px; background-color:#efefef; padding:3px' v-model='postDescription'></textarea>
-        </div>
-      </v-card-text>
-
-      <v-divider></v-divider>
-      <v-card-actions>
-        <v-btn color="#grey lighten-4" flat @click="postModel">Cancel</v-btn>
-        <v-spacer></v-spacer>
-        <v-btn color="blue-grey darken-2" flat @click="addMemory">Add Memory</v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
-
-  <!-- Edit Form -->
-  <v-dialog v-model="dialogPutFlag" width="800" persistent>
-    <v-card>
-      <v-card-title class="headline blue-grey darken-4 white--text">
-        Edit Form
-      </v-card-title>
-
-      <v-text-field v-model="putTitle" label="Memory Title" required style='margin:20px; margin-top:30px'></v-text-field>
-      <v-flex d-flex>
-        <v-text-field v-model="putEmotion" label="Emotion" required style='margin:20px; margin-bottom:0px; margin-left:20px'></v-text-field>
-      </v-flex>
-      <v-card-text>
-        <p>Memory</p>
-        <div style='width:100%;'>
-          <textarea style='width:100%; height:300px; background-color:#efefef; padding:3px' v-model='putDescription'></textarea>
-        </div>
-      </v-card-text>
-
-      <v-divider></v-divider>
-
-      <v-card-actions>
-        <v-btn color="#grey lighten-4" flat @click="putModel">Cancel</v-btn>
-        <v-spacer></v-spacer>
-        <v-btn color="blue-grey darken-2" flat @click="putMemory">Update Memory</v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
-
   </v-container>
 </template>
 
 <script>
 import axios from 'axios';
-
 export default {
+  name: 'MemoryHome',
   data: function () {
     return {
-      memorys: "memorys",
-      //create
+      memory: {},
+      //memoryInfoBool: false,
+      memorys: [],
+    }
+  },
+  mounted: function() {
+    this.fetchMemorys();
+  },
+  methods: {
+    fetchMemorys() {
+      axios.get('/api/memorys').then((response) => {
+        for(var i = 0; i < response.data.memorys.length; i++) {
+          this.memorys.push(response.data.memorys[i]);
+        }
+      }, (error) => {
+        console.log(error);
+      }); 
+    },
+    setMemoryInfo(id){
+      axios.get('api/memorys/${id}.json').then(response => {
+        this.memoryInfo = response.data;
+        this.memoryInfoBool = true;
+      });
+    }
+  }
+}
+
+      /*memorys: "memorys",
+      create
       dialogPostFlag: false,
       postTitle: "",
       postEmotion: "",
       postDescription: "",
-      //edit
+      edit
       dialogPutFlag: false,
       putTitle: '',
       putEmotion: '',
@@ -125,7 +97,7 @@ export default {
     putModel: function() {
       axios.get("/api/memorys/${this.$route.params.id}.json")
       .then(response => 
-        (this.memorys = response.data)
+        (this.memory = response.data)
       )},
       //編集ポップアップ
       //this.dialogPutFlag = !this.dialogPutFlag
@@ -138,6 +110,7 @@ export default {
        this.dialogPutFlag = !this.dialogPutFlag
     },
   }
-}
+}*/
 </script>
+
 

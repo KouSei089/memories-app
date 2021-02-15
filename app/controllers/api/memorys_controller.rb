@@ -6,10 +6,15 @@ class Api::MemorysController < ApplicationController
   def create
     @memory = Memory.new(memory_params)
     if @memory.save
-      render :show, status: :created
+      render :show, formats: 'json', handlers: 'jbuilder', status: :created
     else
       render json: @memory.errors, status: :unprocessable_entity
     end
+  end
+
+  def show
+    @memory = Memory.find(params[:id])
+    render 'show', handlers: 'jbuilder'
   end
 
   def update
@@ -23,6 +28,6 @@ class Api::MemorysController < ApplicationController
 
   private
     def memory_params
-      params.permit(:title, :emotion, :description)
+      params.fetch(:memory, {}).permit(:title, :emotion, :description)
     end
 end
