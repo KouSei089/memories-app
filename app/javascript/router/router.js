@@ -22,7 +22,7 @@ export default new Router({
       path: '/edit/:id',
       name: 'MemoryEdit',
       component: MemoryEdit,
-    }
+    },
   ]
 });
 

@@ -13,7 +13,7 @@
               <v-card-subtitle>{{ memory.emotion }}</v-card-subtitle>
               <v-card-text>{{ memory.description }}</v-card-text>
               <v-card-actions>
-                <v-btn text color="red" @click="setMemoryInfo(memory.id)"><router-link :to="{ path: '/edit/${memory.id}' }">Update</router-link></v-btn>
+                <v-btn text color="red"><router-link :to="{ path: '/edit/' + memory.id }">Update</router-link></v-btn>
                 <v-btn text color="gray">Delete</v-btn>
               </v-card-actions>
             </v-card>
@@ -32,6 +32,7 @@ export default {
   data: function () {
     return {
       memorys: "memorys",
+      memoryEd: {},
     }
   },
   mounted: function() {
@@ -45,11 +46,11 @@ export default {
         console.log(error);
       });
     },
-    setMemoryInfo(id) {
-      axios.get('/api/memorys/${id}.json').then(res => {
-        this.memory = res.data;
+    /*setMemoryInfo(id) {
+      axios.get('/api/memorys/' + id + '.json').then(res => {
+        this.memoryEd = res.data;
      });
-    }
+    },*/
   }
 }
 </script>

@@ -1,6 +1,6 @@
  <template>
  <!-- Edit Form -->
-    <v-dialog width="800" persistent>
+    <v-container style="height: 1000px; max-width: 2400px;">
       <v-card>
         <v-card-title class="headline blue-grey darken-4 white--text">
           Edit Form
@@ -22,10 +22,10 @@
         <v-card-actions>
           <v-btn color="#grey lighten-4" text>Cancel</v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="blue-grey darken-2" text>Update Memory</v-btn>
+          <v-btn color="blue-grey darken-2" text @click="updateMemory(id)">Update Memory</v-btn>
         </v-card-actions>
       </v-card>
-    </v-dialog>
+    </v-container>
 </template>
 
 <script>
@@ -48,13 +48,20 @@ export default {
   },
   methods: {
     setMemoryEdit(id){
-      axios.get('/api/memorys/${id}.json').then( res => {
+      axios.get('/api/memorys/'+ id +'.json').then( res => {
         this.memory.id = res.data.id;
         this.memory.title = res.data.title;
         this.memory.emotion = res.data.emotion;
         this.memory.description = res.data.description;
       });
-    }
+    },
+    updateMemory(id) {
+      axios.put('/api/memorys/'+ id, { memory: this.memory }).then((res) => {
+        this.$router.push({ path: '/' });
+      }, (error) => {
+        console.log(error);
+      });
+    },
   }
 }
 </script>
