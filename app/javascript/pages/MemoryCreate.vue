@@ -40,7 +40,6 @@ export default {
   },
   methods: {
     createMemory() {
-      if (!this.memory.title) return;
       axios.post('/api/memorys', { memory: this.memory }).then((res) => {
         this.$router.push({ path: '/' });
       }, (error) => {

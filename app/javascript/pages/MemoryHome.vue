@@ -7,22 +7,16 @@
             <!-- HTML あとから修正 -->
             <p>Youtube</p>
           </v-flex>
-
           <v-flex xs6>
-            <v-card-title @click="setmemoryInfo(memory.id)">
-              {{ memory.title }
-            </v-card-title>
-
-            <v-card v-show="memoryInfoBool">
-              <v-card-title>{{ memoryInfo.title }}</v-card-title>
-              <v-card-subtitle>{{ memoryInfo.emotion }}</v-card-subtitle>
-              <v-card-text>{{ memoryInfo.description }}</v-card-text>
+            <v-card>
+              <v-card-title>{{ memory.title }}</v-card-title>
+              <v-card-subtitle>{{ memory.emotion }}</v-card-subtitle>
+              <v-card-text>{{ memory.description }}</v-card-text>
               <v-card-actions>
-                <v-btn text color="red">Update</v-btn>
+                <v-btn text color="red" @click="setMemoryInfo(memory.id)"><router-link :to="{ path: '/edit/${memory.id}' }">Update</router-link></v-btn>
                 <v-btn text color="gray">Delete</v-btn>
               </v-card-actions>
             </v-card>
-
           </v-flex>
 
         </v-layout>
@@ -37,9 +31,7 @@ export default {
   name: 'MemoryHome',
   data: function () {
     return {
-      memoryInfo: {},
-      memoryInfoBool: false,
-      memorys: [],
+      memorys: "memorys",
     }
   },
   mounted: function() {
@@ -48,19 +40,16 @@ export default {
   methods: {
     fetchMemorys() {
       axios.get('/api/memorys').then((res) => {
-        for(var i = 0; i < res.data.memorys.length; i++){
-          this.memorys.push(res.data.memorys[i]);
-        }
+        this.memorys = res.data 
       }, (error) => {
         console.log(error);
       });
     },
     setMemoryInfo(id) {
       axios.get('/api/memorys/${id}.json').then(res => {
-        this.memoryInfo = res.data;
-        this.memoryInfoBool = true;
-      });
-    },
+        this.memory = res.data;
+     });
+    }
   }
 }
 </script>

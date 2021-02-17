@@ -1,1 +1,1 @@
-json.array! @memorys, :title, :emotion, :description
+json.array! @memorys, :id,:title, :emotion, :description

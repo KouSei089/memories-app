@@ -1,6 +1,15 @@
 class Api::MemorysController < ApplicationController
+  protect_from_forgery :except => [:create,:update]
+  rescue_from Exception, with: :render_status_500
+  rescue_from ActiveRecord::RecordNotFound, with: :render_status_404
+
   def index
-    @memorys = Memory.order('created_at DESC')
+    @memorys = Memory.order("created_at DESC")
+  end
+
+  def show
+    @memory = Memory.find(params[:id])
+    #render :show, formats: 'json', handlers: 'jbuilder'
   end
 
   def create
@@ -12,17 +21,10 @@ class Api::MemorysController < ApplicationController
     end
   end
 
-  def show
-    @memory = Memory.find(params[:id])
-    render 'show', handlers: 'jbuilder'
-  end
-
-  
-
   def update
     @memory = Memory.find(params[:id])
-    if @memory.update(memory_params)
-      render :show, handlers: 'jbuilder'
+    if @memory.update_attributes(memory_params)
+      render "index", formats: 'json', handlers: 'jbuilder'
     else
       render json: @memory.errors, status: :unprocessable_entity
     end
@@ -30,6 +32,14 @@ class Api::MemorysController < ApplicationController
 
   private
     def memory_params
-      params.permit(:title, :emotion, :description)
+      params.fetch(:memory, {}).permit(:title, :emotion, :description)
+    end
+
+    def render_status_404(exception)
+      render json: { errors: [exception] }, status: 404
+    end
+  
+    def render_status_500(exception)
+      render json: { errors: [exception] }, status: 500
     end
 end
