@@ -14,13 +14,37 @@
               <v-card-text>{{ memory.description }}</v-card-text>
               <v-card-actions>
                 <v-btn text color="red"><router-link :to="{ path: '/edit/' + memory.id }">Update</router-link></v-btn>
-                <v-btn text color="gray">Delete</v-btn>
+                <v-btn text color="gray" @click="deleteMemory(memory.id)">Delete</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
 
         </v-layout>
       </v-card>
+     
+
+      <!-- deleteポップアップ 
+      <v-dialog v-model="dialogDelete" width="400">
+          <v-card>
+            <v-card-title class="headline red lighten-3 white--text" primary-title>
+              Confirm
+            </v-card-title>
+            <v-spacer></v-spacer>
+            <v-card-text>
+              <p>本当に削除してもよろしいですか？</p>
+            </v-card-text>
+
+            <v-divider></v-divider>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="red" @click="deleteMemory(memory.id)">
+                Delete
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog> -->
+
   </v-container>
 </template>
 
@@ -32,7 +56,7 @@ export default {
   data: function () {
     return {
       memorys: "memorys",
-      memoryEd: {},
+      dialogDelete: false,
     }
   },
   mounted: function() {
@@ -51,6 +75,17 @@ export default {
         this.memoryEd = res.data;
      });
     },*/
+    deleteMemory(id) {
+      axios.delete('/api/memorys/' + id).then(res => {
+        this.memorys = "memorys";
+        this.fetchMemorys();
+      });
+      //this.dialogDelete = !this.dialogDelete
+    },
+    /*deleteModel(id) {
+      this.id = id
+      this.dialogDelete = !this.dialogDelete
+    }*/
   }
 }
 </script>

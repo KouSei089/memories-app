@@ -30,6 +30,15 @@ class Api::MemorysController < ApplicationController
     end
   end
 
+  def destroy
+    @memory = Memory.find(params[:id])
+    if @memory.destroy
+      render :show
+    else
+      render json: @memory.errors, status: :unprocessable_entity
+    end
+  end
+
   private
     def memory_params
       params.fetch(:memory, {}).permit(:title, :emotion, :description)
