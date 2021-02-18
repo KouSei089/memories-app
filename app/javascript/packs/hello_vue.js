@@ -3,7 +3,7 @@ import Vuetify from "vuetify"
 import "vuetify/dist/vuetify.min.css"
 import App from '../app.vue'
 import router from '../router/router.js'
-import axios from 'axios'
+//import axios from 'axios'
 
 Vue.use(Vuetify); 
 const vuetify = new Vuetify(); 

@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import axios from '../packs/axios-auth';
+//import axios from '../packs/axios-auth';
 
 export default {
   data() {
