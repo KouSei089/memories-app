@@ -3,10 +3,13 @@ import Router from 'vue-router'
 import MemoryHome from '../pages/MemoryHome.vue'
 import MemoryCreate from '../pages/MemoryCreate.vue'
 import MemoryEdit from '../pages/MemoryEdit.vue'
+import Login from '../pages/Login.vue'
+import Register from '../pages/Register.vue'
 
 Vue.use(Router);
 
 export default new Router({
+  //mode: 'history',
   routes: [
     { 
       path: '/',
@@ -23,6 +26,15 @@ export default new Router({
       name: 'MemoryEdit',
       component: MemoryEdit,
     },
+    {
+      path: '/login', 
+      component: Login,
+    },
+    {
+      path: '/register',
+      component: Register,
+    },
+    
   ]
 });
 
