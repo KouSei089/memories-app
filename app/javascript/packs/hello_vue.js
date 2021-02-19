@@ -4,9 +4,20 @@ import "vuetify/dist/vuetify.min.css"
 import App from '../app.vue'
 import router from '../router/router.js'
 //import axios from 'axios'
+import firebase from 'firebase'
 
 Vue.use(Vuetify); 
 const vuetify = new Vuetify(); 
+
+const config = {
+  apiKey:'AIzaSyAV0VfU3gcMoWHEejm5VFpfRQPLrC1u4os',
+  authDomain: 'YOUR_DOMAIN.firebaseapp.com',
+  databaseURL: 'YOUR_DOMAIN.firebaseio.com',
+  projectId: 'YOUR_ID',
+  storageBucket: 'YOUR_BUCKET_ID.appspot.com',
+  messagingSenderId: 'YOUR_SENDER_ID'
+}
+firebase.initializeApp(config);
 
 //axios.defaults.baseURL = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]"
 

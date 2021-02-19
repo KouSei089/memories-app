@@ -14,12 +14,14 @@
         <v-text-field
           v-model="email"
           label="E-mail"
+          type="text"
           required
           style="margin-bottom: 30px; margin:20px;"
         ></v-text-field>
         <v-text-field
           v-model="password"
           label="Password"
+          type="password"
           required
           style="margin-bottom: 30px; margin:20px;"
         ></v-text-field>
@@ -39,6 +41,7 @@
 
 <script>
 //import axios from '../packs/axios-auth';
+import firebase from 'firebase'
 
 export default {
   data() {
@@ -50,27 +53,16 @@ export default {
   },
   methods: {
     register() {
-      axios.post(
-        '/accounts:signUpkey=AIzaSyAV0VfU3gcMoWHEejm5VFpfRQPLrC1u4os',
-        {
-          email: this.email,
-          password: this.password,
-          returnSecureToken: true
-        }).then((res) => {
-          console.log(res);
-        });
-        this.email = "";
-        this.password = "";
-      }
-    /*submit () {
-      this.$v.$touch()
-    },
-    clear () {
-      this.$v.$reset()
-      this.name = ''
-      this.email = ''
-    },*/
-  },
+      firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+        .then(user => {
+          alert('Create account: ', user.email)
+          this.$router.push('/')
+        })
+        .catch(error => {
+          alert(error.message)
+        })
+    }
+  }
 }
 </script>
 

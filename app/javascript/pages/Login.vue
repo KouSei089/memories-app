@@ -5,12 +5,12 @@
         ログイン
       </v-card-title>
       <form>
-        <v-text-field
+        <!-- <v-text-field
           v-model="name"
           label="Name"
           required
           style="margin-top:30px; margin-bottom: 30px; margin:20px;"
-        ></v-text-field>
+        ></v-text-field> -->
         <v-text-field
           v-model="email"
           label="E-mail"
@@ -25,11 +25,11 @@
         ></v-text-field>
         <v-btn
           class="mr-4"
-          @click="submit"
+          @click="login"
         >
           submit
         </v-btn>
-        <v-btn @click="clear">
+        <v-btn>
           clear
         </v-btn>
       </form>
@@ -38,22 +38,28 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      name: '',
+import firebase from 'firebase'
+
+export default {
+  data () {
+    return {
       email: '',
       password: '',
-    }),
-    methods: {
-      submit () {
-        this.$v.$touch()
-      },
-      clear () {
-        this.$v.$reset()
-        this.name = ''
-        this.email = ''
-      },
-    },
+    }
+  },
+  methods: {
+    login: function () {
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
+        user => {
+          alert('Success!')
+          this.$router.push('/')
+        },
+        err => {
+          alert(err.message)
+        }
+      )
+    }
   }
+}
 </script>
 
