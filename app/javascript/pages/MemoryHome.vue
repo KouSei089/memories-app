@@ -6,7 +6,7 @@
           <v-flex xs6>
             <!-- HTML あとから修正 -->
             <div>
-              <youtube :video-id="url"></youtube>
+              <iframe :src="url | embedVideo" allow="fullscreen"></iframe>
             </div>
           </v-flex>
           <v-flex xs6>
@@ -18,7 +18,6 @@
               <v-btn text color="gray" @click="deleteMemory(memory.id)">Delete</v-btn>
             </v-card-actions>
           </v-flex>
-
         </v-layout>
       </v-card>
   </v-container>
@@ -26,16 +25,6 @@
 
 <script>
 import axios from 'axios';
-import VueYoutube from 'vue-youtube'
-import Vue from 'vue'
-
-/*var video_id = window.location.search.split('v=')[1];
-var ampersandPosition = video_id.indexOf('&');
-if(ampersandPosition != -1) {
-  video_id = video_id.substring(0, ampersandPosition);
-} */
-
-Vue.use(VueYoutube)
 
 export default {
   name: 'MemoryHome',
@@ -43,7 +32,7 @@ export default {
     return {
       memorys: "memorys",
       dialogDelete: false,
-      url: "Wdll9P9icJU"
+      url: "https://www.youtube.com/watch?v=Wdll9P9icJU"
     }
   },
   mounted: function() {
@@ -63,6 +52,13 @@ export default {
         this.fetchMemorys();
       });
     },
-  }
+  },
+  filters: {
+    embedVideo(url) {
+        const matches = url.match(/(\/watch\?v=|youtu\.be\/)([^#&?/]+)/)
+        if (!matches) return ''
+        return 'https://www.youtube.com/embed/' + matches[2]
+    }
+  },
 }
 </script>
