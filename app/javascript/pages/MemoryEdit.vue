@@ -16,6 +16,7 @@
             <textarea style='width:100%; height:300px; background-color:#efefef; padding:3px' v-model='memory.description'></textarea>
           </div>
         </v-card-text>
+        <v-text-field v-model="memory.youtubeurl" label="Youtube URL" required style='margin:20px; margin-top:30px'></v-text-field>
 
         <v-divider></v-divider>
 
@@ -40,6 +41,7 @@ export default {
         title: '',
         emotion: '',
         description: '',
+        youtubeurl: '',
       },
     }
   },
@@ -53,6 +55,7 @@ export default {
         this.memory.title = res.data.title;
         this.memory.emotion = res.data.emotion;
         this.memory.description = res.data.description;
+        this.memory.youtubeurl = res.data.youtubeurl;
       });
     },
     updateMemory(id) {

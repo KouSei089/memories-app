@@ -6,7 +6,7 @@
           <v-flex xs6>
             <!-- HTML あとから修正 -->
             <div>
-              <iframe :src="url | embedVideo" allow="fullscreen"></iframe>
+              <iframe :src="memory.youtubeurl | embedVideo" allow="fullscreen"></iframe>
             </div>
           </v-flex>
           <v-flex xs6>
@@ -32,7 +32,7 @@ export default {
     return {
       memorys: "memorys",
       dialogDelete: false,
-      url: "https://www.youtube.com/watch?v=Wdll9P9icJU"
+      //url: "https://www.youtube.com/watch?v=ghSp6p3IZwI"
     }
   },
   mounted: function() {

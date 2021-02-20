@@ -41,7 +41,7 @@ class Api::MemorysController < ApplicationController
 
   private
     def memory_params
-      params.fetch(:memory, {}).permit(:title, :emotion, :description)
+      params.fetch(:memory, {}).permit(:title, :emotion, :description, :youtubeurl)
     end
 
     def render_status_404(exception)
