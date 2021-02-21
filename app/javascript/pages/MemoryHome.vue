@@ -4,22 +4,8 @@
 
     <v-text-field
       v-model="keyword"
+      label="Sertch"
     ></v-text-field>
-
-    <!--<v-text-field 
-      v-model="searchWord" 
-      v-on:keyup="abstruct" 
-      label="Input Keyword" 
-      style='margin-top:4px'>
-    </v-text-field>
-
-    <v-autocomplete
-      v-model="value"
-      :items="memorys"
-      item-text="emotion"
-      label="Emotion Select"
-      >
-    </v-autocomplete> -->
    
     <v-row>
       <v-col
