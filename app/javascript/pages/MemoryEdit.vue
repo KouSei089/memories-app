@@ -17,8 +17,6 @@
           </div>
         </v-card-text>
         <v-text-field v-model="memory.youtubeurl" label="Youtube URL" required style='margin:20px; margin-top:30px'></v-text-field>
-        <v-text-field v-model="memory.artist" label="Artist" required style='margin:20px; margin-top:30px'></v-text-field>
-        <v-text-field v-model="memory.song" label="Song" required style='margin:20px; margin-top:30px'></v-text-field>
 
         <v-divider></v-divider>
 
@@ -44,8 +42,6 @@ export default {
         emotion: '',
         description: '',
         youtubeurl: '',
-        artist: '',
-        song: '',
       },
     }
   },
@@ -60,8 +56,6 @@ export default {
         this.memory.emotion = res.data.emotion;
         this.memory.description = res.data.description;
         this.memory.youtubeurl = res.data.youtubeurl;
-        this.memory.artist = res.data.artist;
-        this.memory.song = res.data.song;
       });
     },
     updateMemory(id) {

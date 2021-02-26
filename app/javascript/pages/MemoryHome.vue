@@ -24,8 +24,6 @@
           <v-card-title>{{ memory.title }}</v-card-title>
           <v-card-subtitle>{{ memory.emotion }}</v-card-subtitle>
           <v-card-text class="text--primary">{{ memory.description }}</v-card-text>
-          <v-card-subtitle>{{ memory.artist }}</v-card-subtitle>
-          <v-card-subtitle>{{ memory.song }}</v-card-subtitle>
           <v-card-actions>
             <v-btn text>
               <!-- カラー変更 -->
@@ -92,7 +90,7 @@ export default {
       let filtered = [];
       for (let i in this.memorys) {
         let memory = this.memorys[i];
-        if (memory.title.indexOf(this.keyword) !== -1 || memory.emotion.indexOf(this.keyword) !== -1 || memory.description.indexOf(this.keyword) !== -1) {
+        if (memory.title.indexOf(this.keyword) !== -1) {
           filtered.push(memory);
         }
       }
@@ -110,6 +108,14 @@ export default {
       this.id = id
       this.dialogDelete = !this.dialogDelete
     },
+    /*abstruct: function() {
+      this.memorys = []
+      for (i=0;i<this.allData.length;i++) {
+        if((this.allData[i].emotion.indexOf(this.searchWord) !== -1) || (this.allData[i].title.indexOf(this.searchWord) !== -1) || (this.allData[i].description.indexOf(this.searchWord) !== -1)){
+           this.memorys.push(this.allData[i])
+        }
+      }
+    }*/
   },
   filters: {
     embedVideo(url) {

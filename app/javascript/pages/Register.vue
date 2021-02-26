@@ -40,6 +40,7 @@
 </template>
 
 <script>
+//import axios from '../packs/axios-auth';
 import firebase from 'firebase'
 
 export default {

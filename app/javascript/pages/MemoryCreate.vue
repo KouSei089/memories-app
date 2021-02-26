@@ -16,8 +16,6 @@
           </div>
         </v-card-text>
         <v-text-field v-model="memory.youtubeurl" label="Youtube URL" required style='margin:20px; margin-top:30px'></v-text-field>
-        <v-text-field v-model="memory.artist" label="Artist" required style='margin:20px; margin-top:30px'></v-text-field>
-        <v-text-field v-model="memory.song" label="Song" required style='margin:20px; margin-top:30px'></v-text-field>
 
 
         <v-divider></v-divider>
@@ -40,8 +38,6 @@ export default {
         emotion: '',
         description: '',
         youtubeurl: '',
-        artist: '',
-        song: '',
       }
     }
   },

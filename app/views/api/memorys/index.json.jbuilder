@@ -1,1 +1,1 @@
-json.array! @memorys, :id,:title, :emotion, :description, :youtubeurl, :artist, :song
+json.array! @memorys, :id,:title, :emotion, :description, :youtubeurl
