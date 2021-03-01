@@ -43,7 +43,8 @@ export default {
   },
   methods: {
     createMemory() {
-      axios.post('/api/memorys', { memory: this.memory }).then((res) => {
+      axios.post('/api/memorys', { memory: this.memory })
+      .then((res) => {
         this.$router.push({ path: '/' });
       }, (error) => {
         console.log(error);

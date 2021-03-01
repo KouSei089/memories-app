@@ -1,1 +1,1 @@
-json.array! @users, :name, :email, :password_digest
+json.array! @users, :name, :email, :password, :password_confirmation

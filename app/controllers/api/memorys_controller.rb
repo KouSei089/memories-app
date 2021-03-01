@@ -9,7 +9,7 @@ class Api::MemorysController < ApplicationController
 
   def show
     @memory = Memory.find(params[:id])
-    #render "show", formats: 'json', handlers: 'jbuilder'
+    render "show", formats: 'json', handlers: 'jbuilder'
   end
 
   def create
