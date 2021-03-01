@@ -25,7 +25,6 @@
         ></v-text-field>
         <v-btn
           class="mr-4"
-          @click="login"
         >
           submit
         </v-btn>
@@ -36,30 +35,4 @@
     </v-card>
   </v-container>
 </template>
-
-<script>
-import firebase from 'firebase'
-
-export default {
-  data () {
-    return {
-      email: '',
-      password: '',
-    }
-  },
-  methods: {
-    login: function () {
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
-        user => {
-          alert('Success!')
-          this.$router.push('/')
-        },
-        err => {
-          alert(err.message)
-        }
-      )
-    }
-  }
-}
-</script>
 

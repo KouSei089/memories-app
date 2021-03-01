@@ -108,14 +108,6 @@ export default {
       this.id = id
       this.dialogDelete = !this.dialogDelete
     },
-    /*abstruct: function() {
-      this.memorys = []
-      for (i=0;i<this.allData.length;i++) {
-        if((this.allData[i].emotion.indexOf(this.searchWord) !== -1) || (this.allData[i].title.indexOf(this.searchWord) !== -1) || (this.allData[i].description.indexOf(this.searchWord) !== -1)){
-           this.memorys.push(this.allData[i])
-        }
-      }
-    }*/
   },
   filters: {
     embedVideo(url) {

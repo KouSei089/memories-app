@@ -27,7 +27,6 @@
         ></v-text-field>
         <v-btn
           class="mr-4"
-          @click="register"
         >
           submit
         </v-btn>
@@ -38,31 +37,3 @@
     </v-card>
   </v-container>
 </template>
-
-<script>
-//import axios from '../packs/axios-auth';
-import firebase from 'firebase'
-
-export default {
-  data() {
-      return {
-    //name: '',
-    email: '',
-    password: '',
-    }
-  },
-  methods: {
-    register() {
-      firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-        .then(user => {
-          alert('Create account: ', user.email)
-          this.$router.push('/')
-        })
-        .catch(error => {
-          alert(error.message)
-        })
-    }
-  }
-}
-</script>
-
