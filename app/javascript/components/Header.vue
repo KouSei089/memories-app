@@ -11,6 +11,9 @@
     <v-btn outlined style="margin:5px;">
       <router-link style="color:white;" to="/register">登録</router-link>
     </v-btn>
+    <v-btn outlined style="margin:5px;">
+      <router-link style="color:white;" to="/users">ユーザー</router-link>
+    </v-btn>
   </v-toolbar>
 </template>
 

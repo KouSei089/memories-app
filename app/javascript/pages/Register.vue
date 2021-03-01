@@ -5,22 +5,29 @@
         登録
       </v-card-title>
       <form>
-        <!--<v-text-field
-          v-model="name"
+        <v-text-field
+          v-model="user.name"
           label="Name"
           required
           style="margin-top:30px; margin-bottom: 30px; margin:20px;"
-        ></v-text-field> -->
+        ></v-text-field>
         <v-text-field
-          v-model="email"
+          v-model="user.email"
           label="E-mail"
           type="text"
           required
           style="margin-bottom: 30px; margin:20px;"
         ></v-text-field>
         <v-text-field
-          v-model="password"
+          v-model="user.password"
           label="Password"
+          type="password"
+          required
+          style="margin-bottom: 30px; margin:20px;"
+        ></v-text-field>
+        <v-text-field
+          v-model="user.password_confirmation"
+          label="Password確認用"
           type="password"
           required
           style="margin-bottom: 30px; margin:20px;"
@@ -40,27 +47,25 @@
 </template>
 
 <script>
-//import axios from '../packs/axios-auth';
-import firebase from 'firebase'
-
 export default {
   data() {
-      return {
-    //name: '',
-    email: '',
-    password: '',
+    return {
+      user: {
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
+      }
     }
   },
   methods: {
-    register() {
-      firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-        .then(user => {
-          alert('Create account: ', user.email)
-          this.$router.push('/')
-        })
-        .catch(error => {
-          alert(error.message)
-        })
+    register(){
+      axios.post('/api/users', { user: this.user })
+      .then((res) => {
+        this.$router.push({ path: '/' });
+      }, (error) => {
+        console.log(error);
+      });
     }
   }
 }

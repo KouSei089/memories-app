@@ -5,7 +5,10 @@ ruby '2.7.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
-gem 'bcrypt',         '3.1.12'
+gem 'bcrypt'
+gem 'jwt_sessions'
+#[jwt_sessions]のデフォルトのメモリーストア
+gem 'redis'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server

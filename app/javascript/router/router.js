@@ -5,6 +5,7 @@ import MemoryCreate from '../pages/MemoryCreate.vue'
 import MemoryEdit from '../pages/MemoryEdit.vue'
 import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
+import User from '../pages/User.vue'
 
 Vue.use(Router);
 
@@ -34,6 +35,10 @@ export default new Router({
       path: '/register',
       component: Register,
     },
+    {
+      path: '/users',
+      component: User,
+    }
     
   ]
 });
