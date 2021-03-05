@@ -6,12 +6,6 @@
       </v-card-title>
       <form>
         <v-text-field
-          v-model="name"
-          label="Name"
-          required
-          style="margin-top:30px; margin-bottom: 30px; margin:20px;"
-        ></v-text-field>
-        <v-text-field
           v-model="email"
           label="E-mail"
           required
@@ -25,6 +19,7 @@
         ></v-text-field>
         <v-btn
           class="mr-4"
+          @click="login"
         >
           submit
         </v-btn>
@@ -37,12 +32,22 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
   data () {
     return {
+      user: {
+        email: '',
+        password: '',
+      }
     }
   },
+  methods: {
+    login(){
+      axios.post('/api/users',)
+    }
+  }
 }
 </script>
 
