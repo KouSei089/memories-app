@@ -37,15 +37,19 @@ import axios from 'axios';
 export default {
   data () {
     return {
-      user: {
-        email: '',
-        password: '',
-      }
+      id: '',
+      email: '',
+      password: '',
     }
   },
   methods: {
     login(){
-      axios.post('/api/users',)
+      axios.post('/api/sessions',{ email: this.email, password: this.password })
+      .then((res) => {
+        this.$router.push({ path: '/users'});
+      }, (error) => {
+        console.log(error);
+      });
     }
   }
 }
