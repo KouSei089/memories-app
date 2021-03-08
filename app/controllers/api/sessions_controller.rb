@@ -3,12 +3,14 @@ class Api::SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
-      # ユーザーログイン後にユーザー情報のページにリダイレクトする
+    user = User.find_by(email: params[:email])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      payload = { message: 'ログインしました。', name: user.name }
     else
-      render json: @memory.errors, status: :unprocessable_entity
+      payload = { errors: ['メールアドレスまたはパスワードが正しくありません。'] }
     end
+    render json: payload
   end
 
   def destroy
