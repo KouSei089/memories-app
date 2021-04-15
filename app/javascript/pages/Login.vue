@@ -46,6 +46,7 @@ export default {
     login(){
       axios.post('/api/sessions',{ email: this.email, password: this.password })
       .then((res) => {
+        alert("ログインしました。こんにちは"+ res.data.name + "さん");
         this.$router.push({ path: '/users'});
       }, (error) => {
         console.log(error);
